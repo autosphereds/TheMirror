@@ -5,4 +5,4 @@ gtts
 sounddevice
 numpy
 pip
-CFFI  # Required for sounddevice
+CFFI
