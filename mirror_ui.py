@@ -16,18 +16,19 @@ st.title("🤖 The Mirror - AI-Powered Consultant")
 st.subheader("💬 Type your question:")
 user_input = st.text_area("Ask The Mirror...", height=150)
 
-# OpenAI GPT Response Function
+# OpenAI GPT Response Function (Updated for OpenAI >=1.0.0)
 def get_openai_response(prompt):
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",  # Use GPT-4 if available
+        client = openai.OpenAI()
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",  # Use "gpt-4" if available
             messages=[{"role": "user", "content": prompt}],
         )
-        return response["choices"][0]["message"]["content"]
+        return response.choices[0].message.content
     except Exception as e:
         return f"Error: {str(e)}"
 
-# Voice Input Section (No SoundDevice Required)
+# Voice Input Section
 st.subheader("🎤 Speak to The Mirror")
 recognizer = sr.Recognizer()
 
