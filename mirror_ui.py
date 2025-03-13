@@ -1,8 +1,6 @@
 import streamlit as st
 import openai
 import speech_recognition as sr
-import sounddevice as sd
-import numpy as np
 import gtts
 from io import BytesIO
 import tempfile
@@ -29,21 +27,17 @@ def get_openai_response(prompt):
     except Exception as e:
         return f"Error: {str(e)}"
 
-# Voice Input Section
+# Voice Input Section (No SoundDevice Required)
 st.subheader("🎤 Speak to The Mirror")
 recognizer = sr.Recognizer()
 
-def record_audio(duration=5, samplerate=16000):
-    st.write("🎙 Listening...")
-    recording = sd.rec(int(duration * samplerate), samplerate=samplerate, channels=1, dtype="int16")
-    sd.wait()
-    return np.squeeze(recording)
-
 def recognize_audio():
-    with st.spinner("Processing audio..."):
-        audio_data = record_audio()
+    with sr.Microphone() as source:
+        st.write("🎙 Listening... Speak now.")
+        recognizer.adjust_for_ambient_noise(source)
+        audio = recognizer.listen(source, timeout=5)
         try:
-            text = recognizer.recognize_google(audio_data)
+            text = recognizer.recognize_google(audio)
             return text
         except sr.UnknownValueError:
             return "❌ Sorry, I couldn't understand the audio."
