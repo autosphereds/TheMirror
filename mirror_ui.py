@@ -9,7 +9,7 @@ import tempfile
 import os
 
 # Set OpenAI API Key (Replace 'your-api-key' with your actual key)
-openai.api_key = "your-api-key"
+openai.api_key = "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"
 
 # Streamlit App Title
 st.title("🤖 The Mirror - AI-Powered Consultant")
