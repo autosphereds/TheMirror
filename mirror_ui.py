@@ -1,79 +1,64 @@
 import streamlit as st
-import openai
 import speech_recognition as sr
+import pandas as pd
 import gtts
 from io import BytesIO
-import tempfile
 import os
 
-# Set OpenAI API Key (Replace 'your-api-key' with your actual key)
-openai.api_key = "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"
+# Prewritten questions
+questions = [
+    "What was the longest wait time you experienced this week when trying to get a manager's approval, and what was the specific situation?",
+    "In the last three deals you worked, which CRM updates took you the most time to complete and why?",
+    "What's one recurring customer question or concern that you find yourself addressing multiple times each day?",
+    "During your last three Pre/Post Demo processes, which step caused the most delays or complications?",
+    "What's one tool or resource you frequently need but have trouble accessing quickly during customer interactions?"
+]
 
-# Streamlit App Title
-st.title("🤖 The Mirror - AI-Powered Consultant")
+# Load responses or create new file
+csv_file = "responses.csv"
+if os.path.exists(csv_file):
+    responses_df = pd.read_csv(csv_file)
+else:
+    responses_df = pd.DataFrame(columns=["Question", "Response"])
 
-# User input section
-st.subheader("💬 Type your question:")
-user_input = st.text_area("Ask The Mirror...", height=150)
+st.title("📋 The Mirror: Employee Survey")
 
-# OpenAI GPT Response Function (Updated for OpenAI >=1.0.0)
-def get_openai_response(prompt):
-    try:
-        client = openai.OpenAI()
-        response = client.chat.completions.create(
-            model="gpt-3.5-turbo",  # Use "gpt-4" if available
-            messages=[{"role": "user", "content": prompt}],
-        )
-        return response.choices[0].message.content
-    except Exception as e:
-        return f"Error: {str(e)}"
+# Select a question
+question_index = st.session_state.get("question_index", 0)
+st.subheader(questions[question_index])
 
-# Voice Input Section
-st.subheader("🎤 Speak to The Mirror")
+# Text input for response
+text_response = st.text_area("Enter your response here:")
+
+# Voice input
 recognizer = sr.Recognizer()
-
-def recognize_audio():
+if st.button("🎤 Record Response"):
     with sr.Microphone() as source:
-        st.write("🎙 Listening... Speak now.")
-        recognizer.adjust_for_ambient_noise(source)
-        audio = recognizer.listen(source, timeout=5)
+        st.write("Listening...")
         try:
-            text = recognizer.recognize_google(audio)
-            return text
+            audio = recognizer.listen(source, timeout=5)
+            voice_response = recognizer.recognize_google(audio)
+            text_response = voice_response
+            st.success("Voice response recorded!")
         except sr.UnknownValueError:
-            return "❌ Sorry, I couldn't understand the audio."
-        except sr.RequestError as e:
-            return f"❌ Error connecting to Google API: {e}"
+            st.error("Could not understand the audio.")
+        except sr.RequestError:
+            st.error("Could not request results; check your internet connection.")
 
-# Buttons for text & voice input
-if st.button("🔍 Get AI Response"):
-    if user_input.strip():
-        response = get_openai_response(user_input)
-        st.subheader("💡 The Mirror's Response:")
-        st.write(response)
+# Save response
+if st.button("Submit Response") and text_response:
+    new_entry = pd.DataFrame({"Question": [questions[question_index]], "Response": [text_response]})
+    responses_df = pd.concat([responses_df, new_entry], ignore_index=True)
+    responses_df.to_csv(csv_file, index=False)
+    st.success("Response recorded!")
+
+    # Move to next question
+    if question_index < len(questions) - 1:
+        st.session_state["question_index"] = question_index + 1
+        st.experimental_rerun()
     else:
-        st.warning("Please enter a question!")
+        st.success("All questions completed! Thank you.")
 
-if st.button("🎙 Start Voice Input"):
-    voice_text = recognize_audio()
-    st.write(f"🗣 You said: {voice_text}")
-    if "❌" not in voice_text:
-        response = get_openai_response(voice_text)
-        st.subheader("💡 The Mirror's Response:")
-        st.write(response)
-
-# Text-to-Speech Output
-st.subheader("🔊 Hear the Response")
-if st.button("🔈 Play Response"):
-    if user_input.strip():
-        response_text = get_openai_response(user_input)
-        tts = gtts.gTTS(response_text)
-        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
-        tts.save(temp_file.name)
-        st.audio(temp_file.name, format="audio/mp3")
-        os.remove(temp_file.name)
-    else:
-        st.warning("Enter a question first!")
-
-# Footer
-st.markdown("**🚀 Powered by The Mirror AI**")
+# Show responses (optional)
+if st.checkbox("📊 View Responses"):
+    st.dataframe(responses_df)
