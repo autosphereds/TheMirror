@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "dealership-ai-app",
+  "private_key_id": "e92d968a43d43441ac7864778a5260c2558bde80",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDA94EmXE3cktjz\nnT3mnDigmfMLIPsidLS3qAQExAZpCfL6wcMkJoDTO9r8Lw59YUHqlWkNRAvLlT1+\nxFYafGhNttKaOV3joHl0wFnicGbb0yXXSC8xvnt4s2vFuK9cNkHSBxf/yEwTGpaC\ngkVxnmLuzJKHXP8Quk1SrOh9pEEnfhll2Qc2ZgDEZ9cWGytK4+HdflB2cdDaKXA2\nqZ/idp8kGofOXGaZVJTw2zYKYyxf6qOKJU1J+UOLCZzQoly7r5dHjbmhGaqSx7QX\nIn7AD1qsi+/fuNBL0elnK8/Y5y+v5640l/BLpx0mfdwdz+0suqBOwQRL7i2HC+mJ\nGXTBLgGbAgMBAAECggEAE6LcDJhGABUdaKTuoKHzDTy9Q7umcponray2Q/nioRu3\nExdWkT4ty9ECdrkfI1kbSRDNMOFkxeG48UZvcKCKSKY7BiCiUkCJO307aFSB0wrI\nhgC9dLVqgRzY8bTae2q2BfZc1dV/EE6bVEqHYIl6jcxZeNbYyc37gldADVECpE7+\nZ8zmTFNuyX1S1plyVlJ333QpmXyn3NHHkzHk6oKnU0u3tUu4eL+ZCis8PSQV7443\nmhWPCbngv5AuYzHrlctRm5Ixf+bH3yf9lrOSS56ufCsVs+Odo1wTBNg/I8d0ECDp\n93qS54tUDnyssLIrz/fXzJ9DesDmczbAin2zioJUIQKBgQDnEWmA/UlQPXM2jIEA\nQx9Yjcej6chMeg4EVkxvUjyoeaHE9XkfsM07N3uNiRwWoMQ+kr0NotKlU/OyEmED\nqOtD9shOGxeie8e9BOoSDuOKomEyoAsrWsLyh6ck0+nSPjxvQ8G1g55nr4rGFJd6\nRNnUvplT3+9FEvEX6SaUg3vR6wKBgQDVyagQXiCGHO15gFcSIFez9juucaDUDDUz\nt8V7Uyt/hBVgzrLrOSNI63UjmKSD0JJU1R8xvv38oRLZEigPRFPgMsyE0Qr8ACBz\nL89v/GjhtAtEaKm1aRDegDG3HDqspsv8ZtrSQA9Tn9dw4f6oVaN2XY8jFPV1BVA5\nVgHEyVnzEQKBgQCAsaT2T5vGkgMaTZUHpVrPAmA/vdRuK8ikx7/YfJAGMYBU53cn\nnFwh8BvjT4sSW0YRp76d2qLBrAldk3jvBeTKvKcBQXufZptvfk4z8pDuxNOn05WE\n9w7+72i7TT+8didIvQ8lXoIaM53yBsP7OF+uat2Q5ncoHI2lCJkRPE35MwKBgD1A\nlseBwH3MYfnS3J+T5qzoGrdjVPoMOV4FBC7OaIMTe/CNqFOevk5RL/Gv9UrTAmoN\n2e8t0qWEHNtWyWV+ZS2yQEi5gBUtkB6QjzV9sysfo67I8f7JCI1HW3ckPmdjLsS1\nT3K36exCur5b8dOXHct3COC7S4xoplCXJNCWBBCRAoGADLJenpFVeDUru1COkzJE\niERkMuMTpn6dKhiJjX6c/htLeVF8/SsbNjNi4z+XtLSOpybulDvDCEIRmlkaUYrw\nmvc7epouxwvOdfHPRK3zVoWYAGN5QO2M5t5e5ty/5eBxgnGqTIOdTZt57dUID3OC\nrTz/ci1ztB2FdAkwyJC0RYM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "the-mirror@dealership-ai-app.iam.gserviceaccount.com",
+  "client_id": "107612668771645046131",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/the-mirror%40dealership-ai-app.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
