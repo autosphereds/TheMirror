@@ -1,7 +1,6 @@
 streamlit
 openai==1.2.0
 speechrecognition
-gtts
+pyaudio
 numpy
-pandas
 pip
