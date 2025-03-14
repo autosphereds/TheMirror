@@ -1,6 +1,5 @@
 import streamlit as st
 import speech_recognition as sr
-import sounddevice as sd
 import numpy as np
 import pandas as pd
 import gtts
@@ -36,15 +35,15 @@ st.write("Or record your response:")
 r = sr.Recognizer()
 
 def record_audio():
-    with sr.Microphone() as source:
-        st.write("Listening...")
-        audio = r.listen(source)
-        try:
+    try:
+        with sr.Microphone() as source:
+            st.write("Listening...")
+            audio = r.listen(source)
             return r.recognize_google(audio)
-        except sr.UnknownValueError:
-            return "Could not understand audio"
-        except sr.RequestError:
-            return "Could not request results"
+    except sr.UnknownValueError:
+        return "Could not understand audio"
+    except sr.RequestError:
+        return "Could not request results"
 
 if st.button("Record Response"):
     text_response = record_audio()
